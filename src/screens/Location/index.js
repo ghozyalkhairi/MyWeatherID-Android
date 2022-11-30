@@ -1,7 +1,6 @@
 import {memo} from 'react'
 import {SafeAreaView, ActivityIndicator, View} from 'react-native'
 import {useLoading} from '../../cuacaStore'
-import Header from '../../components/Header'
 import KotaList from '../../components/KotaList'
 import Navbar from '../../components/Navbar'
 import ProvinsiPicker from '../../components/ProvinsiPicker'
@@ -18,9 +17,7 @@ const Location = ({route, navigation}) => {
           <ActivityIndicator size="large" color="#FED059" />
         </View>
       ) : (
-        <>
-          <KotaList />
-        </>
+        <KotaList />
       )}
       <Navbar routeName={route.name} onPress={onNavigate} />
     </SafeAreaView>
