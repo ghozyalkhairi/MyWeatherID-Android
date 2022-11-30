@@ -4,6 +4,7 @@ import {id} from 'date-fns/locale'
 import imgPath from '../imgPath'
 
 const useCuacaStore = create((set, get) => ({
+  // * STATES
   loading: true,
   userLocation: {},
   dataProvinsi: [],
@@ -15,7 +16,7 @@ const useCuacaStore = create((set, get) => ({
   provPickerValue: null,
   currentDate: format(new Date(), 'yyyyMMdd'),
   currentTime: format(new Date(), 'kkmm'),
-
+  // * ACTIONS
   actions: {
     setLoading: loading => set({loading}),
     setUserLocation: userLocation => set({userLocation}),
@@ -80,7 +81,6 @@ const useCuacaStore = create((set, get) => ({
       const cuacaSuhuKota = get().cuacaSuhuKota
       const currentTime = get().currentTime
       const timestamp = parseInt(currentTime.slice(0, 2))
-
       if (timestamp >= 24 || timestamp < 6)
         set({currentForecast: cuacaSuhuKota[3]})
       if (timestamp >= 6 && timestamp < 12)

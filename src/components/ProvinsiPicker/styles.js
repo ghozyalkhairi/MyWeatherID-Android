@@ -17,7 +17,11 @@ const Styles = StyleSheet.create({
     backgroundColor: colors.blue,
   },
   placeholder: {
-    color: colors.gold,
+    color: colors.white,
+    fontSize: 15,
+  },
+  arrow: {
+    tintColor: colors.gold,
   },
 })
 

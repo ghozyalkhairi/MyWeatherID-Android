@@ -1,7 +1,6 @@
-import {memo, useEffect, useState} from 'react'
+import {memo, useState} from 'react'
 import {
   useDataProvinsi,
-  useUserLocation,
   useCuacaActions,
   useProvPickerValue,
 } from '../../cuacaStore'
@@ -12,14 +11,12 @@ import Styles from './styles'
 const ProvinsiPicker = () => {
   DropDownPicker.setTheme('DARK')
   const listProvinsi = useDataProvinsi()
-  const userLocation = useUserLocation()
   const provPickerValue = useProvPickerValue()
   const {setListKota, setDataCuaca, setLoading, setProvPickerValue} =
     useCuacaActions()
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState(provPickerValue)
   const onProvinsiChange = value => {
-    console.log(value)
     setProvPickerValue(value)
     setValue(value)
     setLoading(true)
@@ -29,17 +26,12 @@ const ProvinsiPicker = () => {
       setLoading(false)
     })
   }
-  useEffect(() => {
-    const selectedProv = listProvinsi.find(
-      provinsi =>
-        provinsi.name.trim().toLowerCase() ===
-        userLocation.provinsi.trim().toLowerCase(),
-    )?.id
-    setValue(selectedProv || provPickerValue)
-  }, [])
   return (
     <DropDownPicker
+      placeholder="Pilih Provinsi"
       style={Styles.container}
+      arrowIconStyle={Styles.arrow}
+      placeholderStyle={Styles.placeholder}
       dropDownContainerStyle={Styles.dropdown}
       selectedItemContainerStyle={Styles.selectedItemContainer}
       selectedItemLabelStyle={Styles.selectedItem}
