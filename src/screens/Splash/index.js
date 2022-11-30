@@ -1,10 +1,6 @@
 import {memo, useEffect} from 'react'
 import {Image, SafeAreaView, View} from 'react-native'
-import {
-  useDataProvinsi,
-  useCuacaActions,
-  useUserLocation,
-} from '../../cuacaStore'
+import {useCuacaActions} from '../../cuacaStore'
 import {fetchLocation, fetchProvinsi, fetchCuaca} from '../../http'
 import Geolocation from '@react-native-community/geolocation'
 import Title from '../../components/Title'
@@ -13,8 +9,6 @@ import Styles from './styles'
 
 const Splash = ({navigation}) => {
   const onNavigate = () => navigation.navigate('Home')
-  const dataProvinsi = useDataProvinsi()
-  const userLocation = useUserLocation()
   const {
     setUserLocation,
     setDataProvinsi,
