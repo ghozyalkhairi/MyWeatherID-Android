@@ -1,4 +1,4 @@
-import {memo, useState} from 'react'
+import {memo, useEffect, useState} from 'react'
 import {
   useDataProvinsi,
   useUserLocation,
@@ -12,16 +12,11 @@ const ProvinsiPicker = () => {
   DropDownPicker.setTheme('DARK')
   const listProvinsi = useDataProvinsi()
   const userLocation = useUserLocation()
-  const {setListKota, setDataCuaca, setLoading, setProvPickerValue} =
-    useCuacaActions()
-  const selectedProv = listProvinsi.find(
-    provinsi =>
-      provinsi.name.trim().toLowerCase() ===
-      userLocation.provinsi.trim().toLowerCase(),
-  ).id
+  const {setListKota, setDataCuaca, setLoading} = useCuacaActions()
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState(selectedProv)
+  const [value, setValue] = useState(null)
   const onProvinsiChange = value => {
+    console.log(value)
     setValue(value)
     setLoading(true)
     fetchCuaca(value).then(resp => {
@@ -30,6 +25,14 @@ const ProvinsiPicker = () => {
       setLoading(false)
     })
   }
+  useEffect(() => {
+    const selectedProv = listProvinsi.find(
+      provinsi =>
+        provinsi.name.trim().toLowerCase() ===
+        userLocation.provinsi.trim().toLowerCase(),
+    ).id
+    setValue(selectedProv)
+  }, [])
   return (
     <DropDownPicker
       style={Styles.container}
