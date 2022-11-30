@@ -125,7 +125,7 @@ export const useDataCuaca = () => useCuacaStore(state => state.dataCuaca)
 export const useListKota = () => useCuacaStore(state => state.listKota)
 export const useCurrentForecast = () =>
   useCuacaStore(state => state.currentForecast)
-export const UseCuacaSuhuKota = () =>
+export const useCuacaSuhuKota = () =>
   useCuacaStore(state => state.cuacaSuhuKota)
 export const useCurrentDate = () => useCuacaStore(state => state.currentDate)
 export const useCurrentTime = () => useCuacaStore(state => state.currentTime)

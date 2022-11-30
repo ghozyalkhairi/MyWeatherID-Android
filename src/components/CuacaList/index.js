@@ -1,10 +1,10 @@
 import {memo} from 'react'
-import {UseCuacaSuhuKota} from '../../cuacaStore'
+import {useCuacaSuhuKota} from '../../cuacaStore'
 import {FlatList} from 'react-native'
 import MiniCard from '../MiniCard'
 
 const CuacaList = () => {
-  const cuacaList = UseCuacaSuhuKota()
+  const cuacaList = useCuacaSuhuKota()
   return (
     <FlatList
       horizontal
