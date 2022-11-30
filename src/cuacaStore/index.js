@@ -12,6 +12,7 @@ const useCuacaStore = create((set, get) => ({
   cuacaSuhuList: {},
   cuacaSuhuKota: [],
   currentForecast: {},
+  provPickerValue: null,
   currentDate: format(new Date(), 'yyyyMMdd'),
   currentTime: format(new Date(), 'kkmm'),
 
@@ -28,6 +29,7 @@ const useCuacaStore = create((set, get) => ({
       })
       set({listKota})
     },
+    setProvPickerValue: provPickerValue => set({provPickerValue}),
     resetCurrentDate: () => {
       const newDate = format(new Date(), 'yyyyMMdd')
       set({currentDate: newDate})

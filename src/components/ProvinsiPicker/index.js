@@ -3,6 +3,7 @@ import {
   useDataProvinsi,
   useUserLocation,
   useCuacaActions,
+  useProvPickerValue,
 } from '../../cuacaStore'
 import {fetchCuaca} from '../../http'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -12,11 +13,14 @@ const ProvinsiPicker = () => {
   DropDownPicker.setTheme('DARK')
   const listProvinsi = useDataProvinsi()
   const userLocation = useUserLocation()
-  const {setListKota, setDataCuaca, setLoading} = useCuacaActions()
+  const provPickerValue = useProvPickerValue()
+  const {setListKota, setDataCuaca, setLoading, setProvPickerValue} =
+    useCuacaActions()
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState(null)
   const onProvinsiChange = value => {
     console.log(value)
+    setProvPickerValue(value)
     setValue(value)
     setLoading(true)
     fetchCuaca(value).then(resp => {
@@ -30,8 +34,8 @@ const ProvinsiPicker = () => {
       provinsi =>
         provinsi.name.trim().toLowerCase() ===
         userLocation.provinsi.trim().toLowerCase(),
-    ).id
-    setValue(selectedProv)
+    )?.id
+    setValue(selectedProv || provPickerValue)
   }, [])
   return (
     <DropDownPicker
