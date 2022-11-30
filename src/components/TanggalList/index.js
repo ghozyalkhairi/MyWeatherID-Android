@@ -1,4 +1,4 @@
-import {memo, useEffect} from 'react'
+import {memo} from 'react'
 import {useCuacaActions, useCurrentDate} from '../../cuacaStore'
 import {Text, FlatList, TouchableOpacity} from 'react-native'
 import Styles from './styles'
