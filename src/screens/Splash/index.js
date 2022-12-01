@@ -21,32 +21,28 @@ const Splash = ({navigation}) => {
     setLoading,
   } = useCuacaActions()
   useEffect(() => {
-    const getPosition = async () => {
+    Geolocation.getCurrentPosition(info => getLocation(info))
+    const getLocation = async info => {
       setLoading(true)
-      Geolocation.getCurrentPosition(info => {
-        fetchLocation(info.coords.longitude, info.coords.latitude).then(
-          resp => {
-            setUserLocation({
-              kota: resp.data.features[0].context[3].text,
-              provinsi: resp.data.features[0].context[4].text,
-            })
-            fetchProvinsi().then(resp => {
-              setDataProvinsi(resp.data)
-              fetchCuaca(getProvID()).then(resp => {
-                setDataCuaca(resp.data)
-                setListKota()
-                setCuacaSuhuList()
-                setCuacaSuhuKota()
-                setCurrentForecast()
-                setLoading(false)
-                console.log('SUCCESS')
-              })
-            })
-          },
-        )
+      fetchLocation(info.coords.longitude, info.coords.latitude).then(resp => {
+        setUserLocation({
+          kota: resp.data.features[0].context[3].text,
+          provinsi: resp.data.features[0].context[4].text,
+        })
+        fetchProvinsi().then(resp => {
+          setDataProvinsi(resp.data)
+          fetchCuaca(getProvID()).then(resp => {
+            setDataCuaca(resp.data)
+            setListKota()
+            setCuacaSuhuList()
+            setCuacaSuhuKota()
+            setCurrentForecast()
+            setLoading(false)
+            console.log('SUCCESS')
+          })
+        })
       })
     }
-    getPosition()
   }, [])
   return (
     <SafeAreaView style={Styles.container}>
