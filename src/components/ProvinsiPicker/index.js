@@ -12,8 +12,13 @@ const ProvinsiPicker = () => {
   DropDownPicker.setTheme('DARK')
   const listProvinsi = useDataProvinsi()
   const provPickerValue = useProvPickerValue()
-  const {setListKotaCopy, setDataCuacaCopy, setLoading, setProvPickerValue} =
-    useCuacaActions()
+  const {
+    setListKotaCopy,
+    setDataCuacaCopy,
+    setLoading,
+    setProvPickerValue,
+    resetCurrentDate,
+  } = useCuacaActions()
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState(provPickerValue)
   const onProvinsiChange = value => {
@@ -22,6 +27,7 @@ const ProvinsiPicker = () => {
     fetchCuaca(value).then(resp => {
       setDataCuacaCopy(resp.data)
       setListKotaCopy()
+      resetCurrentDate()
       setLoading(false)
     })
   }
