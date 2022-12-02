@@ -1,13 +1,16 @@
 import {memo} from 'react'
 import {Text, TouchableOpacity} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
-import {useCuacaActions} from '../../cuacaStore'
+import {useCuacaActions, useUserLocation} from '../../cuacaStore'
 import KotaIcon from '../../assets/svg/city.svg'
 import Styles from './styles'
 
 const KotaItem = ({kota, provinsi}) => {
+  const location = useUserLocation()
+  console.log(location)
   const {navigate} = useNavigation()
   const {
+    mergeCuacaKota,
     setUserLocation,
     setCuacaSuhuKota,
     setCuacaSuhuList,
@@ -16,6 +19,7 @@ const KotaItem = ({kota, provinsi}) => {
   } = useCuacaActions()
   const onChangeLocation = () => {
     setUserLocation({kota, provinsi})
+    mergeCuacaKota()
     resetCurrentDate()
     setCuacaSuhuList()
     setCuacaSuhuKota()

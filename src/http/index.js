@@ -1,15 +1,5 @@
 import axios from 'axios'
 
-export const fetchLocation = async (longitude, latitude) => {
-  const accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'
-  const options = {
-    method: 'GET',
-    url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`,
-  }
-
-  return await axios.request(options)
-}
-
 export const fetchProvinsi = async () => {
   const url = 'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json'
   const options = {
@@ -21,7 +11,7 @@ export const fetchProvinsi = async () => {
 }
 
 export const fetchCuaca = async provID => {
-  const url = 'https://secure-sands-34800.herokuapp.com'
+  const url = 'https://cuaca-json.vercel.app'
   const options = {
     method: 'GET',
     url: `${url}${getProvURL(parseInt(provID))}`,

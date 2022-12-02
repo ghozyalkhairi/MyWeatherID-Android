@@ -1,14 +1,20 @@
 import {memo} from 'react'
 import {FlatList} from 'react-native'
-import {useListKota} from '../../cuacaStore'
+import {
+  useListKota,
+  useProvPickerValue,
+  useListKotaCopy,
+} from '../../cuacaStore'
 import KotaItem from '../KotaItem'
 import Styles from './styles'
 
 const KotaList = () => {
   const listKota = useListKota()
+  const listKotaCopy = useListKotaCopy()
+  const provPickerValue = useProvPickerValue()
   return (
     <FlatList
-      data={listKota}
+      data={provPickerValue ? listKotaCopy : listKota}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={Styles.container}
       keyExtractor={item => item.$.id}

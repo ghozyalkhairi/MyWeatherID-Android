@@ -6,10 +6,12 @@ import imgPath from '../imgPath'
 const useCuacaStore = create((set, get) => ({
   // * STATES
   loading: true,
-  userLocation: {},
+  userLocation: {kota: 'Pontianak', provinsi: 'Kalimantan Barat'},
   dataProvinsi: [],
   dataCuaca: [],
+  dataCuacaCopy: [],
   listKota: [],
+  listKotaCopy: [],
   cuacaSuhuList: {},
   cuacaSuhuKota: [],
   currentForecast: {},
@@ -22,6 +24,7 @@ const useCuacaStore = create((set, get) => ({
     setUserLocation: userLocation => set({userLocation}),
     setDataProvinsi: dataProvinsi => set({dataProvinsi}),
     setDataCuaca: dataCuaca => set({dataCuaca}),
+    setDataCuacaCopy: dataCuacaCopy => set({dataCuacaCopy}),
     setCurrentDate: currentDate => set({currentDate}),
     setListKota: () => {
       const dataCuaca = get().dataCuaca
@@ -29,6 +32,19 @@ const useCuacaStore = create((set, get) => ({
         if (kota.parameter) return kota
       })
       set({listKota})
+    },
+    setListKotaCopy: () => {
+      const dataCuacaCopy = get().dataCuacaCopy
+      const listKotaCopy = dataCuacaCopy.filter(kota => {
+        if (kota.parameter) return kota
+      })
+      set({listKotaCopy})
+    },
+    mergeCuacaKota: () => {
+      const dataCuacaCopy = get().dataCuacaCopy
+      const listKotaCopy = get().listKotaCopy
+      if (!dataCuacaCopy.length || !listKotaCopy.length) return
+      set({dataCuaca: dataCuacaCopy, listKota: listKotaCopy})
     },
     setProvPickerValue: provPickerValue => set({provPickerValue}),
     resetCurrentDate: () => {
@@ -46,6 +62,7 @@ const useCuacaStore = create((set, get) => ({
       const userKota = get().userLocation.kota.trim().toLowerCase()
       const currentDate = get().currentDate
       const listKota = get().listKota
+      console.log(listKota)
       const cuacaKota = listKota.find(
         kota => kota.$.description.trim().toLowerCase() === userKota,
       ).parameter[6]
@@ -122,7 +139,10 @@ export const useProvPickerValue = () =>
   useCuacaStore(state => state.provPickerValue)
 export const useDataProvinsi = () => useCuacaStore(state => state.dataProvinsi)
 export const useDataCuaca = () => useCuacaStore(state => state.dataCuaca)
+export const useDataCuacaCopy = () =>
+  useCuacaStore(state => state.dataCuacaCopy)
 export const useListKota = () => useCuacaStore(state => state.listKota)
+export const useListKotaCopy = () => useCuacaStore(state => state.listKotaCopy)
 export const useCurrentForecast = () =>
   useCuacaStore(state => state.currentForecast)
 export const useCuacaSuhuKota = () =>
