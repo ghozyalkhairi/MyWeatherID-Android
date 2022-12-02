@@ -62,7 +62,6 @@ const useCuacaStore = create((set, get) => ({
       const userKota = get().userLocation.kota.trim().toLowerCase()
       const currentDate = get().currentDate
       const listKota = get().listKota
-      console.log(listKota)
       const cuacaKota = listKota.find(
         kota => kota.$.description.trim().toLowerCase() === userKota,
       ).parameter[6]

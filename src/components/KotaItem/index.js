@@ -6,8 +6,6 @@ import KotaIcon from '../../assets/svg/city.svg'
 import Styles from './styles'
 
 const KotaItem = ({kota, provinsi}) => {
-  const location = useUserLocation()
-  console.log(location)
   const {navigate} = useNavigation()
   const {
     mergeCuacaKota,
