@@ -18,6 +18,8 @@ const ProvinsiPicker = () => {
     setLoading,
     setProvPickerValue,
     resetCurrentDate,
+    setCuacaSuhuList,
+    setCuacaSuhuKota,
   } = useCuacaActions()
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState(provPickerValue)
@@ -28,6 +30,8 @@ const ProvinsiPicker = () => {
       setDataCuacaCopy(resp.data)
       setListKotaCopy()
       resetCurrentDate()
+      setCuacaSuhuList()
+      setCuacaSuhuKota()
       setLoading(false)
     })
   }
